@@ -2,7 +2,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,16 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-gradient-to-b from-sky-400 to-sky-200 font-sans antialiased",
           fontSans.variable
         )}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange>
-          {children}
-        </ThemeProvider>
+        {children}
       </body>
     </html>
   );

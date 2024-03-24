@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export interface WeatherDashboardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -10,12 +11,17 @@ const WeatherDashboard = React.forwardRef<
 >(({ className, children, ...props }, ref) => {
   return (
     <div
-      className={cn("border rounded-md p-6", className)}
+      className={cn("flex flex-col justify-center items-center", className)}
       ref={ref}
       {...props}>
       {children}
       <h1>Tokyo</h1>
-      <p>Clear but rain in the afternoon</p>
+      <Image
+        src={"/images/cloudy.svg"}
+        alt="Clouds"
+        width="256"
+        height="256"
+      />
     </div>
   );
 });

@@ -21,6 +21,7 @@ const WeatherDashboard = React.forwardRef<
         alt="Clouds"
         width="256"
         height="256"
+        priority
       />
     </div>
   );

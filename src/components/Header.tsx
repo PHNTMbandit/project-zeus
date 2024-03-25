@@ -1,29 +1,42 @@
 "use client";
 
-import React, { useState } from "react";
-import Logo from "./Logo";
+import * as React from "react";
+import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
+import { Logo } from "./logo";
 
-const Header = () => {
-  const [inputText, setInputText] = useState("");
+export interface HeaderProps
+  extends React.InputHTMLAttributes<HTMLDivElement> {}
 
-  const handleInputChange = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setInputText(event.target.value);
-  };
+const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
+  ({ className, children, ...props }, ref) => {
+    const [inputText, setInputText] = useState("");
 
-  return (
-    <div className="flex justify-between">
-      <Logo />
-      <Input
-        value={inputText}
-        placeholder="Search for a city..."
-        className="bg-transparent w-fit"
-        onChange={handleInputChange}
-      />
-    </div>
-  );
-};
+    const handleInputChange = async (
+      event: React.ChangeEvent<HTMLInputElement>
+    ) => {
+      setInputText(event.target.value);
+    };
 
-export default Header;
+    return (
+      <div
+        className={cn("flex justify-between", className)}
+        ref={ref}
+        {...props}>
+        {children}
+        <Logo />
+        <Input
+          value={inputText}
+          placeholder="Search for a city..."
+          className="bg-transparent w-fit"
+          onChange={handleInputChange}
+        />
+      </div>
+    );
+  }
+);
+
+Header.displayName = "Header";
+
+export { Header };

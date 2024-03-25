@@ -1,15 +1,17 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { MapPinnedIcon } from "lucide-react";
+import Link from "next/link";
 
-export interface LogoProps extends React.InputHTMLAttributes<HTMLDivElement> {}
+export interface LogoProps
+  extends React.InputHTMLAttributes<HTMLAnchorElement> {}
 
-const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
-  ({ className, children, ...props }, ref) => {
+const Logo = React.forwardRef<HTMLLinkElement, LogoProps>(
+  ({ className, children, ...props }) => {
     return (
-      <div
+      <Link
+        href="/"
         className={cn("flex gap-1 items-center", className)}
-        ref={ref}
         {...props}>
         {children}
         <MapPinnedIcon
@@ -17,7 +19,7 @@ const Logo = React.forwardRef<HTMLDivElement, LogoProps>(
           height={30}
         />
         <h3 className="text-nowrap">Weather App</h3>
-      </div>
+      </Link>
     );
   }
 );

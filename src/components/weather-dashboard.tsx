@@ -16,7 +16,7 @@ const WeatherDashboard = React.forwardRef<
   WeatherDashboardProps
 >(({ className, children, ...props }, ref) => {
   const { city } = useCityContext();
-  const { weather } = useWeatherContext();
+  const { weather: weather } = useWeatherContext();
   console.log(weather);
   return (
     <div

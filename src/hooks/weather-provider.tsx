@@ -14,7 +14,7 @@ const WeatherProvider = ({ children }: { children: React.ReactNode }) => {
   const [weather, setWeather] = useState<Weather | null>(null);
 
   return (
-    <WeatherContext.Provider value={{ weather, setWeather }}>
+    <WeatherContext.Provider value={{ weather: weather, setWeather }}>
       {children}
     </WeatherContext.Provider>
   );

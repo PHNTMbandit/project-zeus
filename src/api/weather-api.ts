@@ -23,3 +23,16 @@ export const getWeather = async (city: City | null) => {
     console.error(error);
   }
 };
+
+export const getForecast = async (city: City | null) => {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${city?.name}&units=metric&appid=beee9aed34af7b7e2e938db81d68bb9e`
+    );
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+};

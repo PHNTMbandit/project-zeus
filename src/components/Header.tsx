@@ -5,7 +5,7 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { useCityContext } from "@/hooks/city-provider";
-import { getCity, getWeather } from "@/api/geoDB";
+import { getCity, getWeather, getForecast } from "@/api/weather-api";
 import { City } from "@/types/city";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/popover";
 import { ChevronsUpDown, Check } from "lucide-react";
 import { useWeatherContext } from "@/hooks/weather-provider";
+import { useForecastContext } from "@/hooks/forecast-provider";
 
 export interface HeaderProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -33,10 +34,12 @@ const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
     const [open, setOpen] = React.useState(false);
     const { city, setCity } = useCityContext();
     const { setWeather } = useWeatherContext();
+    const { setForecast } = useForecastContext();
 
     const handleClick = async (city: City | null) => {
       setCity(city);
       setWeather(await getWeather(city));
+      setForecast(await getForecast(city));
     };
 
     const handleInputChange = async (

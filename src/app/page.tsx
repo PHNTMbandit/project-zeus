@@ -2,6 +2,7 @@ import { ForecastCard } from "@/components/forecast-card";
 import { WeatherDashboard } from "@/components/weather-dashboard";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Header } from "@/components/header";
+import { useCityContext } from "@/hooks/city-provider";
 
 export default function Home() {
   return (

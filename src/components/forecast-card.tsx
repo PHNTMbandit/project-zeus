@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { GlassEffect } from "./glass-effect";
 
 export interface ForecastCardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -8,9 +9,9 @@ export interface ForecastCardProps
 const ForecastCard = React.forwardRef<HTMLDivElement, ForecastCardProps>(
   ({ className, children, ...props }, ref) => {
     return (
-      <div
+      <GlassEffect
         className={cn(
-          "flex flex-col items-center justify-between w-[63mm] h-[88mm] backdrop-blur-xl bg-white/10 rounded-xl shadow-lg ring-1 ring-black/5 p-6",
+          "flex flex-col items-center justify-between w-[63mm] h-[88mm] ",
           className
         )}
         ref={ref}
@@ -23,7 +24,7 @@ const ForecastCard = React.forwardRef<HTMLDivElement, ForecastCardProps>(
           width="128"
           height="128"
         />
-      </div>
+      </GlassEffect>
     );
   }
 );

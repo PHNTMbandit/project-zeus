@@ -7,7 +7,7 @@ export interface LogoProps
   extends React.InputHTMLAttributes<HTMLAnchorElement> {}
 
 const Logo = React.forwardRef<HTMLLinkElement, LogoProps>(
-  ({ className, children, ...props }) => {
+  ({ className, children, ...props }, ref) => {
     return (
       <Link
         href="/"

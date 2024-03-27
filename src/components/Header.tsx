@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { useCityContext } from "@/hooks/city-provider";
-import { getCity } from "@/api/geoDB";
+import { getCity, getWeather } from "@/api/geoDB";
 import { City } from "@/types/city";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,7 +22,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ChevronsUpDown, Check } from "lucide-react";
-import { GlassEffect } from "./glass-effect";
+import { useWeatherContext } from "@/hooks/weather-provider";
 
 export interface HeaderProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -33,9 +32,11 @@ const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
     const [suggestedCities, setSuggestedCities] = useState<City[] | null[]>([]);
     const [open, setOpen] = React.useState(false);
     const { city, setCity } = useCityContext();
+    const { setWeather } = useWeatherContext();
 
     const handleClick = async (city: City | null) => {
       setCity(city);
+      setWeather(await getWeather(city));
     };
 
     const handleInputChange = async (
@@ -79,7 +80,7 @@ const Header = React.forwardRef<HTMLDivElement, HeaderProps>(
                 placeholder="Search cities..."
               />
               <CommandList>
-                <CommandEmpty>No framework found.</CommandEmpty>
+                <CommandEmpty>No city found.</CommandEmpty>
                 <CommandGroup>
                   {suggestedCities.length > 0 &&
                     suggestedCities.map((suggestedCity, index) => (

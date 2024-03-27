@@ -4,6 +4,9 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useCityContext } from "@/hooks/city-provider";
+import { useWeatherContext } from "@/hooks/weather-provider";
+import moment from "moment-timezone";
+import { WeatherParameter } from "./weather-parameter";
 
 export interface WeatherDashboardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -13,22 +16,57 @@ const WeatherDashboard = React.forwardRef<
   WeatherDashboardProps
 >(({ className, children, ...props }, ref) => {
   const { city } = useCityContext();
-  console.log(city);
-
+  const { weather } = useWeatherContext();
+  console.log(weather);
   return (
     <div
-      className={cn("flex flex-col justify-center items-center", className)}
+      className={cn("flex flex-col items-center", className)}
       ref={ref}
       {...props}>
       {children}
-      <h1>{city?.name}</h1>
-      <Image
-        src={"/images/cloudy.svg"}
-        alt="Clouds"
-        width="256"
-        height="256"
-        priority
-      />
+      {weather && (
+        <section className="text-center">
+          <h2>{city?.name}</h2>
+          <h4>
+            {moment().tz(weather?.timezone.toString()).toDate().toDateString()}
+          </h4>
+          <div className="grid grid-cols-3 items-center justify-items-center w-screen">
+            <div>
+              <h1 className="text-6xl">{Math.round(weather?.main.temp)}°</h1>
+              <h2>{weather.weather[0].main}</h2>
+            </div>
+            <Image
+              src={"/images/cloudy.svg"}
+              alt="Clouds"
+              width="256"
+              height="256"
+              priority
+            />
+            <div className="grid grid-cols-2 gap-8">
+              <WeatherParameter
+                parameter={"humidity"}
+                amount={`${Math.round(weather.main.humidity).toString()}%`}
+              />
+              <WeatherParameter
+                parameter={"wind"}
+                amount={`${Math.round(weather.wind.speed).toString()} KM/H`}
+              />
+              <WeatherParameter
+                parameter={"sunrise"}
+                amount={new Date(
+                  weather.sys.sunrise * 1000
+                ).toLocaleTimeString()}
+              />
+              <WeatherParameter
+                parameter={"sunset"}
+                amount={new Date(
+                  weather.sys.sunset * 1000
+                ).toLocaleTimeString()}
+              />
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 });

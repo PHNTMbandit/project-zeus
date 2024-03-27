@@ -1,19 +1,4 @@
 import { City } from "@/types/city";
-import { RateLimiterMemory } from "rate-limiter-flexible";
-
-const options = {
-  method: "GET",
-  headers: {
-    "X-RapidAPI-Key": "1c2519f508msh0592514862c93cep1d1090jsn3ed19c11ff45",
-    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
-    "Content-Type": "application/json",
-  },
-};
-
-const rateLimiter = new RateLimiterMemory({
-  points: 10,
-  duration: 1,
-});
 
 export const getCity = async (cityPrefix: string) => {
   try {

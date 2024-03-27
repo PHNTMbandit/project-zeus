@@ -41,7 +41,7 @@ h1 {
 }
 
 h2 {
-  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 h3 {
@@ -49,7 +49,7 @@ h3 {
 }
 
 h4 {
-  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  @apply scroll-m-20 text-lg font-semibold tracking-tight;
 }
 
 p {

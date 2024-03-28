@@ -7,7 +7,6 @@ import { useCityContext } from "@/hooks/city-provider";
 import { useWeatherContext } from "@/hooks/weather-provider";
 import moment from "moment-timezone";
 import { WeatherParameter } from "./weather-parameter";
-import { weatherIcons } from "@/data/weather-icon";
 
 export interface WeatherDashboardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -26,26 +25,30 @@ const WeatherDashboard = React.forwardRef<
       {...props}>
       {children}
       {weather && (
-        <section className="text-center">
+        <section>
           <h2>
             In {city?.name}, looks like {weather.weather[0].description}
           </h2>
           <h4>
             {moment().tz(weather?.timezone.toString()).toDate().toDateString()}
           </h4>
-          <div className="grid grid-cols-3 items-center justify-items-center w-screen">
-            <div>
-              <h1 className="text-6xl">{Math.round(weather?.main.temp)}°</h1>
-              <h2>{weather.weather[0].main}</h2>
+          <div className="flex gap-40 items-center justify-center">
+            <div className="flex items-center">
+              <div>
+                <h1 className="text-8xl">{Math.round(weather?.main.temp)}°</h1>
+                <h4 className="mt-4">
+                  Feels like {Math.round(weather?.main.feels_like)}°
+                </h4>
+              </div>
+              <Image
+                src={`/openweathermap/${weather.weather[0].icon}.svg`}
+                alt={weather.weather[0].description}
+                width="384"
+                height="384"
+                priority
+              />
             </div>
-            <Image
-              src={weatherIcons[weather.weather[0].description]}
-              alt={weather.weather[0].description}
-              width="256"
-              height="256"
-              priority
-            />
-            <div className="grid grid-cols-2 gap-8">
+            <div className="flex flex-col">
               <WeatherParameter
                 parameter={"humidity"}
                 amount={`${Math.round(weather.main.humidity).toString()}%`}

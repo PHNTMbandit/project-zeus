@@ -14,7 +14,7 @@ const WeatherParameter = React.forwardRef<
 >(({ parameter, amount, className, children, ...props }, ref) => {
   return (
     <div
-      className={cn("flex flex-col items-center", className)}
+      className={cn("flex gap-4 items-center", className)}
       ref={ref}
       {...props}>
       {children}

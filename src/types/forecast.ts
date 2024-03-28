@@ -5,5 +5,5 @@ export type Forecast = {
 export type ForecastItem = {
   dt_txt: string;
   main: { temp: number };
-  weather: [{ description: string }];
+  weather: [{ description: string; icon: string }];
 };

@@ -20,7 +20,7 @@ const ForecastCard = React.forwardRef<HTMLDivElement, ForecastCardProps>(
         {children}
         <h2>{Math.round(forecast.main.temp)}°</h2>
         <Image
-          src={weatherIcons[forecast.weather[0].description]}
+          src={`/openweathermap/${forecast.weather[0].icon}.svg`}
           alt={forecast.weather[0].description}
           width="128"
           height="128"

@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { GlassEffect } from "./glass-effect";
 import { ForecastItem } from "@/types/forecast";
+import { weatherIcons } from "@/data/weather-icon";
 
 export interface ForecastCardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {
@@ -19,8 +20,8 @@ const ForecastCard = React.forwardRef<HTMLDivElement, ForecastCardProps>(
         {children}
         <h2>{Math.round(forecast.main.temp)}°</h2>
         <Image
-          src={"/images/clear-day.svg"}
-          alt="Clouds"
+          src={weatherIcons[forecast.weather[0].description]}
+          alt={forecast.weather[0].description}
           width="128"
           height="128"
         />

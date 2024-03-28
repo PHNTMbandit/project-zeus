@@ -7,6 +7,7 @@ import { useCityContext } from "@/hooks/city-provider";
 import { useWeatherContext } from "@/hooks/weather-provider";
 import moment from "moment-timezone";
 import { WeatherParameter } from "./weather-parameter";
+import { weatherIcons } from "@/data/weather-icon";
 
 export interface WeatherDashboardProps
   extends React.InputHTMLAttributes<HTMLDivElement> {}
@@ -26,7 +27,9 @@ const WeatherDashboard = React.forwardRef<
       {children}
       {weather && (
         <section className="text-center">
-          <h2>{city?.name}</h2>
+          <h2>
+            In {city?.name}, looks like {weather.weather[0].description}
+          </h2>
           <h4>
             {moment().tz(weather?.timezone.toString()).toDate().toDateString()}
           </h4>
@@ -36,8 +39,8 @@ const WeatherDashboard = React.forwardRef<
               <h2>{weather.weather[0].main}</h2>
             </div>
             <Image
-              src={"/images/cloudy.svg"}
-              alt="Clouds"
+              src={weatherIcons[weather.weather[0].description]}
+              alt={weather.weather[0].description}
               width="256"
               height="256"
               priority

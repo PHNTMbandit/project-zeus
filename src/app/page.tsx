@@ -1,5 +1,5 @@
 import { WeatherDashboard } from "@/components/weather-dashboard";
-import { Header } from "@/components/header";
+import { Header } from "@/components/Header";
 import { ForecastDashboard } from "@/components/forecast-dashboard";
 
 export default function Home() {

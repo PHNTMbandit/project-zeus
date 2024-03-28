@@ -3,6 +3,8 @@ import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import CityProvider from "@/hooks/city-provider";
+import WeatherProvider from "@/hooks/weather-provider";
+import ForecastProvider from "@/hooks/forecast-provider";
 
 export const metadata: Metadata = {
   title: "Weather App",
@@ -26,7 +28,11 @@ export default async function RootLayout({
           "min-h-screen bg-gradient-to-b from-sky-400 to-sky-200 font-sans antialiased",
           fontSans.variable
         )}>
-        <CityProvider>{children}</CityProvider>
+        <CityProvider>
+          <WeatherProvider>
+            <ForecastProvider>{children}</ForecastProvider>
+          </WeatherProvider>
+        </CityProvider>
       </body>
     </html>
   );

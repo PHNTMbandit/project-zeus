@@ -1,6 +1,6 @@
-import { WeatherDashboard } from "@/components/weather-dashboard";
-import { Header } from "@/components/header";
-import { ForecastDashboard } from "@/components/forecast-dashboard";
+import { WeatherDashboard } from "../components/weather-dashboard";
+import { Header } from "../components/header";
+import { ForecastDashboard } from "../components/forecast-dashboard";
 
 export default function Home() {
   return (
